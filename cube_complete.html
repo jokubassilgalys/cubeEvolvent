@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#top {
+	height: 214px;
+	width: 214px;
+	position: relative;
+	left: 250px;
+	background-color: white;
+}
+#side1 {
+	height: 214px;
+	width: 214px;
+	position: absolute;
+	top: 250px;
+	background-color: white;
+}
+#side2 {
+	height: 214px;
+	width: 214px;
+	position: absolute;
+	left: 258px;
+	top: 250px;
+	background-color: white;
+}
+#side3 {
+	height: 214px;
+	width: 214px;
+	position: absolute;
+	left: 516px;
+	top: 250px;
+	background-color: white;
+}
+#side4 {
+	height: 214px;
+	width: 214px;
+	position: absolute;
+	left: 774px;
+	top: 250px;
+	background-color: white;
+}
+#bottom {
+	height: 214px;
+	width: 214px;
+	position: absolute;
+	left: 258px;
+	top: 500px;
+	background-color: white;
+}
+#buttons {
+	height: 214px;
+	width: 214px;
+	top: 490px;
+	position: absolute;
+}
+div.column1 {
+	height: 70px;
+	width: 70px;
+	border: 1px solid black;
+	position: relative;
+}
+div.column2 {
+	height: 70px;
+	width: 70px;
+	border: 1px solid black;
+	position: absolute;
+	left: 72px;
+}
+div.column3 {
+	height: 70px;
+	width: 70px;
+	border: 1px solid black;
+	position: absolute;
+	left: 144px;
+}
+div.color {
+	height: 70px;
+	width: 70px;
+	position: absolute;
+	border: 1px solid black;
+	background-color: white;
+}
+#colors {
+	height: 214px;
+	width: 474px;
+	position: absolute;
+	left: 516px;
+	top: 8px;
+}
+</style>
+</head>
+<body onload="zoom()">
+<div class="color" id="colorCube"></div>
+<div id="top">
+	<div class="column3" id="3">3</div>
+	<div class="column2" id="2">2</div>
+	<div class="column1" id="1">1</div>
+	<div class="column3" id="4">4</div>
+	<div class="column2" id="9" data-pos="topSide">9</div>
+	<div class="column1" id="8">8</div>
+	<div class="column3" id="5">5</div>
+	<div class="column2" id="6">6</div>
+	<div class="column1" id="7">7</div>
+</div>
+<div id="side1">
+	<div class="column3" id="19">19</div>
+	<div class="column2" id="20">20</div>
+	<div class="column1" id="21">21</div>
+	<div class="column3" id="31">31</div>
+	<div class="column2" id="32" data-pos="side1">32</div>
+	<div class="column1" id="33">33</div>
+	<div class="column3" id="43">43</div>
+	<div class="column2" id="44">44</div>
+	<div class="column1" id="45">45</div>
+</div>
+<div id="side2">
+	<div class="column3" id="16">16</div>
+	<div class="column2" id="17">17</div>
+	<div class="column1" id="18">18</div>
+	<div class="column3" id="28">28</div>
+	<div class="column2" id="29" data-pos="side2">29</div>
+	<div class="column1" id="30">30</div>
+	<div class="column3" id="40">40</div>
+	<div class="column2" id="41">41</div>
+	<div class="column1" id="42">42</div>
+</div>
+<div id="side3">
+	<div class="column3" id="13">13</div>
+	<div class="column2" id="14">14</div>
+	<div class="column1" id="15">15</div>
+	<div class="column3" id="25">25</div>
+	<div class="column2" id="26" data-pos="side3">26</div>
+	<div class="column1" id="27">27</div>
+	<div class="column3" id="37">37</div>
+	<div class="column2" id="38">38</div>
+	<div class="column1" id="39">39</div>
+</div>
+<div id="side4">
+	<div class="column3" id="10">10</div>
+	<div class="column2" id="11">11</div>
+	<div class="column1" id="12">12</div>
+	<div class="column3" id="22">22</div>
+	<div class="column2" id="23" data-pos="side4">23</div>
+	<div class="column1" id="24">24</div>
+	<div class="column3" id="34">34</div>
+	<div class="column2" id="35">35</div>
+	<div class="column1" id="36">36</div>
+</div>
+<div id="bottom">
+	<div class="column3" id="48">48</div>
+	<div class="column2" id="47">47</div>
+	<div class="column1" id="46">46</div>
+	<div class="column3" id="49">49</div>
+	<div class="column2" id="54" data-pos="botSide">54</div>
+	<div class="column1" id="53">53</div>
+	<div class="column3" id="50">50</div>
+	<div class="column2" id="51">51</div>
+	<div class="column1" id="52">52</div>
+</div>
+
+<div id="colors">
+	<div id="331" class="color" style="background-color:yellow"></div>
+	<div id="332" class="color" style="left: 90px; background-color:white"></div>
+	<div id="333" class="color" style="left: 180px; background-color:red"></div>
+	<div id="334" class="color" style="left: 270px; background-color:blue"></div>
+	<div id="335" class="color" style="left: 360px; background-color:orange"></div>
+	<div id="336" class="color" style="left: 450px; background-color:green"></div>
+</div>
+
+<div id="buttons">
+<button onclick="solve()">Solve</button>
+<p>
+<button onclick="row1CV()" onmouseover="row1Hover()" onmouseleave="out()">row1</button>
+<button onclick="row1CCV()" onmouseover="row1Hover()" onmouseleave="out()">row1C</button>
+<button onclick="col4CV()"  onmouseover="col4Hover()" onmouseleave="out()">col4</button>
+<button onclick="col4CCV()"onmouseover="col4Hover()" onmouseleave="out()">col4C</button>
+<p>
+<button onclick="row2CV()" onmouseover="row2Hover()" onmouseleave="out()">row2</button>
+<button onclick="row2CCV()" onmouseover="row2Hover()" onmouseleave="out()">row2C</button>
+<button onclick="col5CV()" onmouseover="col5Hover()" onmouseleave="out()">col5</button>
+<button onclick="col5CCV()" onmouseover="col5Hover()" onmouseleave="out()">col5C</button>
+<p>
+<button onclick="row3CV()" onmouseover="row3Hover()" onmouseleave="out()">row3</button>
+<button onclick="row3CCV()" onmouseover="row3Hover()" onmouseleave="out()">row3C</button>
+<button onclick="col6CV()" onmouseover="col6Hover()" onmouseleave="out()">col6</button>
+<button onclick="col6CCV()" onmouseover="col6Hover()" onmouseleave="out()">col6C</button>
+<p>
+<button onclick="col1CV()" onmouseover="col1Hover()" onmouseleave="out()">col1</button>
+<button onclick="col1CCV()" onmouseover="col1Hover()" onmouseleave="out()">col1C</button>
+<p>
+<button onclick="col2CV()" onmouseover="col2Hover()" onmouseleave="out()">col2</button>
+<button onclick="col2CCV()" onmouseover="col2Hover()" onmouseleave="out()">col2C</button>
+<p>
+<button onclick="col3CV()" onmouseover="col3Hover()" onmouseleave="out()">col3</button>
+<button onclick="col3CCV()" onmouseover="col3Hover()" onmouseleave="out()">col3C</button>
+</div>
+
+<script>
+	document.body.style.backgroundColor = "#F0F8FF";
+	var color = "white";
+	for(var i = 1; i <= 54; i++){
+		document.getElementById(i).style.backgroundColor = "grey";
+		document.getElementById(i).onmousedown = function(){
+			this.style.backgroundColor = color;
+		}
+	}
+	
+	document.getElementById('331').onmousedown = function(){
+		color = "yellow";
+		document.getElementById('colorCube').style.backgroundColor = color;
+	}
+	document.getElementById('332').onmousedown = function(){
+		color = "white";
+		document.getElementById('colorCube').style.backgroundColor = color;
+	}
+	document.getElementById('333').onmousedown = function(){
+		color = "red";
+		document.getElementById('colorCube').style.backgroundColor = color;
+	}
+	document.getElementById('334').onmousedown = function(){
+		color = "blue";
+		document.getElementById('colorCube').style.backgroundColor = color;
+	}
+	document.getElementById('335').onmousedown = function(){
+		color = "orange";
+		document.getElementById('colorCube').style.backgroundColor = color;
+	}
+	document.getElementById('336').onmousedown = function(){
+		color = "green";
+		document.getElementById('colorCube').style.backgroundColor = color;
+	}
+	
+	document.onkeydown = function(event){
+		if(event.key == "w"){
+			color = "white";
+			document.getElementById('colorCube').style.backgroundColor = color;
+		}	
+		if(event.key == "r"){
+			color = "red";
+			document.getElementById('colorCube').style.backgroundColor = color;
+		}
+		if(event.key == "b"){
+			color = "blue";
+			document.getElementById('colorCube').style.backgroundColor = color;
+		}
+		if(event.key == "g"){
+			color = "green";
+			document.getElementById('colorCube').style.backgroundColor = color;
+		}
+		if(event.key == "o"){
+			color = "orange";
+			document.getElementById('colorCube').style.backgroundColor = color;
+		}
+		if(event.key == "y"){
+			color = "yellow";
+			document.getElementById('colorCube').style.backgroundColor = color;
+		}
+	}
+function zoom() {
+	document.body.style.zoom = "90%" 
+}
+function row1Hover(){
+	var row = [];
+	for(var i = 10; i <= 21; i++){
+		row.push(i);
+	}
+	var block = [];
+	for(var i = 1; i <= 9; i++){
+		block.push(i);
+	}
+	HoverRow(row);
+	HoverBlock(block);
+}
+function row2Hover(){
+	var row = [];
+	for(var i = 22; i <= 33; i++){
+		row.push(i);
+	}
+	HoverRow(row);
+}
+function row3Hover(){
+	var row = [];
+	for(var i = 34; i <= 45; i++){
+		row.push(i);
+	}
+	var block = [];
+	for(var i = 46; i <= 54; i++){
+		block.push(i);
+	}
+	HoverRow(row);
+	HoverBlock(block);
+}
+function col1Hover(){
+	var block = [21, 20, 19, 31, 43, 44, 45, 33, 32];
+	var col = [1, 8, 7, 18, 30, 42, 46, 53, 52, 34, 22, 10];
+	HoverBlock(block);
+	HoverCol(col);
+}
+function col2Hover(){
+	var col = [2, 9, 6, 17, 29, 41, 47, 54, 51, 35, 23, 11];
+	HoverCol(col);
+}
+function col3Hover(){
+	var block = [13, 14, 15, 27, 39, 38, 37, 25, 26];
+	var col = [3, 4, 5, 16, 28, 40, 48, 49, 50, 36, 24, 12];
+	HoverBlock(block);
+	HoverCol(col);
+}
+function col4Hover(){
+	var block = [18, 17, 16, 28, 40, 41, 42, 30, 29];
+	var col = [7, 6, 5, 15, 27, 39, 48, 47, 46, 43, 31, 19];
+	HoverBlock(block);
+	HoverCol(col);
+}
+function col5Hover(){
+	var col = [8, 9, 4, 14, 26, 38, 49, 54, 53, 44, 32, 20];
+	HoverCol(col);
+}
+function col6Hover(){
+	var block = [10, 11, 12, 24, 36, 35, 34, 22, 23];
+	var col = [1, 2, 3, 13, 25, 37, 50, 51, 52, 45, 33, 21];
+	HoverBlock(block);
+	HoverCol(col);
+}
+function HoverRow(row){
+
+	for(var i = 0; i < row.length; i++){
+		document.getElementById(row[i]).style.opacity = '0.75';
+	}
+}
+function HoverCol(col){
+	for(var i = 0; i < col.length; i++){
+		document.getElementById(col[i]).style.opacity = '0.75';
+	}
+}
+function HoverBlock(block){
+	for(var i = 0; i < block.length; i++){
+		document.getElementById(block[i]).style.opacity = '0.75';
+	}
+}
+function out(){
+	for(var i = 1; i <= 54; i++){
+		document.getElementById(i).style.opacity = '1';
+	}
+}
+
+function row1CV(){
+	var colors = [];
+	var a = 6;
+	var b = 0;
+	var c = 18;
+	var d = 9;
+	
+	for(var i=1; i<=21; i++){
+		colors.push(document.getElementById(i).style.backgroundColor);
+	}
+	for(var i=1; i<=2; i++){
+		document.getElementById(i).style.backgroundColor = colors[a];
+		a++;
+	}
+	for(var i=3; i<=8; i++){
+		document.getElementById(i).style.backgroundColor = colors[b];
+		b++;
+	}
+	for(var i=10; i<=12; i++){
+		document.getElementById(i).style.backgroundColor = colors[c];
+		c++;
+	}
+	for(var i=13; i<=21; i++){
+		document.getElementById(i).style.backgroundColor = colors[d];
+		d++;
+	}
+}
+function row1CCV(){
+	var colors = [];
+	var a = 2;
+	var b = 0;
+	var c = 12;
+	var d = 9;
+	
+	for(var i=1; i<=21; i++){
+		colors.push(document.getElementById(i).style.backgroundColor);
+	}
+	for(var i=1; i<=6; i++){
+		document.getElementById(i).style.backgroundColor = colors[a];
+		a++;
+	}
+	for(var i=7; i<=8; i++){
+		document.getElementById(i).style.backgroundColor = colors[b];
+		b++;
+	}
+	for(var i=10; i<=18; i++){
+		document.getElementById(i).style.backgroundColor = colors[c];
+		c++;
+	}
+	for(var i=19; i<=21; i++){
+		document.getElementById(i).style.backgroundColor = colors[d];
+		d++;
+	}
+}
+function row2CV(){
+	var colors = [];
+	var a = 9;
+	var b = 0;
+	
+	for(var i=22; i<=33; i++){
+		colors.push(document.getElementById(i).style.backgroundColor);
+	}
+	for(var i=22; i<=24; i++){
+		document.getElementById(i).style.backgroundColor = colors[a];
+		a++;
+	}
+	for(var i=25; i<=33; i++){
+		document.getElementById(i).style.backgroundColor = colors[b];
+		b++;
+	}
+}
+function row2CCV(){
+	var colors = [];
+	var a = 3;
+	var b = 0;
+	
+	for(var i=22; i<=33; i++){
+		colors.push(document.getElementById(i).style.backgroundColor);
+	}
+	for(var i=22; i<=30; i++){
+		document.getElementById(i).style.backgroundColor = colors[a];
+		a++;
+	}
+	for(var i=31; i<=33; i++){
+		document.getElementById(i).style.backgroundColor = colors[b];
+		b++;
+	}
+}
+function row3CV(){
+	var colors = [];
+	var a = 9;
+	var b = 0;
+	var c = 14;
+	var d = 12;
+	
+	for(var i=34; i<=54; i++){
+		colors.push(document.getElementById(i).style.backgroundColor);
+	}
+	for(var i=34; i<=36; i++){
+		document.getElementById(i).style.backgroundColor = colors[a];
+		a++;
+	}
+	for(var i=37; i<=45; i++){
+		document.getElementById(i).style.backgroundColor = colors[b];
+		b++;
+	}
+	for(var i=46; i<=51; i++){
+		document.getElementById(i).style.backgroundColor = colors[c];
+		c++;
+	}
+	for(var i=52; i<=53; i++){
+		document.getElementById(i).style.backgroundColor = colors[d];
+		d++;
+	}
+}
+function row3CCV(){
+
+	var colors = [];
+	var a = 3;
+	var b = 0;
+	var c = 18;
+	var d = 12;
+	
+	for(var i=34; i<=54; i++){
+		colors.push(document.getElementById(i).style.backgroundColor);
+	}
+	for(var i=34; i<=42; i++){
+		document.getElementById(i).style.backgroundColor = colors[a];
+		a++;
+	}
+	for(var i=43; i<=45; i++){
+		document.getElementById(i).style.backgroundColor = colors[b];
+		b++;
+	}
+	for(var i=46; i<=47; i++){
+		document.getElementById(i).style.backgroundColor = colors[c];
+		c++;
+	}
+	for(var i=48; i<=53; i++){
+		document.getElementById(i).style.backgroundColor = colors[d];
+		d++;
+	}
+}
+function col1CV(){
+	var arr = [21, 20, 19, 31, 43, 44, 45, 33];
+	var arr2 = [1, 8, 7, 18, 30, 42, 46, 53, 52, 34, 22, 10];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+function col1CCV(){
+	var arr = [19, 20, 21, 33, 45, 44, 43, 31];
+	var arr2 = [7, 8, 1, 10, 22, 34, 52, 53, 46, 42, 30, 18];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+function col2CV(){
+	var arr = [2, 9, 6, 17, 29, 41, 47, 54, 51, 35, 23, 11];
+	var colors = [];
+	
+	for(var i=0; i<=11; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+9];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-3];
+		}
+	}
+}
+function col2CCV(){
+	var arr = [6, 9, 2, 11, 23, 35, 51, 54, 47, 41, 29, 17];
+	var colors = [];
+	
+	for(var i=0; i<=11; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+9];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-3];
+		}
+	}
+}
+function col3CV(){
+	var arr = [13, 14, 15, 27, 39, 38, 37, 25];
+	var arr2 = [3, 4, 5, 16, 28, 40, 48, 49, 50, 36, 24, 12];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+function col3CCV(){
+	var arr = [15, 14, 13, 25, 37, 38, 39, 27];
+	var arr2 = [5, 4, 3, 12, 24, 36, 50, 49, 48, 40, 28, 16];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+function col4CV(){
+	var arr = [18, 17, 16, 28, 40, 41, 42, 30];
+	var arr2 = [7, 6, 5, 15, 27, 39, 48, 47, 46, 43, 31, 19];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+function col4CCV(){
+	var arr = [16, 17, 18, 30, 42, 41, 40, 28];
+	var arr2 = [5, 6, 7, 19, 31, 43, 46, 47, 48, 39, 27, 15];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+function col5CV(){
+	var arr = [8, 9, 4, 14, 26, 38, 49, 54, 53, 44, 32, 20];
+	var colors = [];
+	
+	for(var i=0; i<=11; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+9];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-3];
+		}
+	}
+}
+function col5CCV(){
+	var arr = [4, 9, 8, 20, 32, 44, 53, 54, 49, 38, 26, 14];
+	var colors = [];
+	
+	for(var i=0; i<=11; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+9];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-3];
+		}
+	}
+}
+function col6CV(){
+	var arr = [10, 11, 12, 24, 36, 35, 34, 22];
+	var arr2 = [1, 2, 3, 13, 25, 37, 50, 51, 52, 45, 33, 21];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}	
+function col6CCV(){
+	var arr = [12, 11, 10, 22, 34, 35, 36, 24];
+	var arr2 = [3, 2, 1, 21, 33, 45, 52, 51, 50, 37, 25, 13];
+	var colors = [];
+	var colors2 = [];
+	
+	for(var i=0; i<=7; i++){
+		colors.push(document.getElementById(arr[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=7; i++){
+		if(i <= 1){
+			document.getElementById(arr[i]).style.backgroundColor = colors[i+6];
+		}else{
+			document.getElementById(arr[i]).style.backgroundColor = colors[i-2];
+		}
+	}
+	
+	for(var i=0; i<=11; i++){
+		colors2.push(document.getElementById(arr2[i]).style.backgroundColor);
+	}
+	for(var i=0; i<=11; i++){
+		if(i <= 2){
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i+9];
+		}else{
+			document.getElementById(arr2[i]).style.backgroundColor = colors2[i-3];
+		}
+	}
+}
+
+function solve(){
+	alert('ne');
+	/*var midBC = [9,32,29,26,23];
+	var sideBC = [2,4,6,8,20,31,44,33,17,28,41,30,14,25,38,27,11,22,35,24];
+
+	for(var i=1; i<=54; i++){
+		if(document.getElementById(i).style.backgroundColor == 'white' && midBC.includes(i) == true){
+			var whiteCenter = i;
+			console.log(whiteCenter);
+		}
+		if(document.getElementById(n).style.backgroundColor = 'yellow'){
+			var yellowCenter = n;
+		}
+		if(document.getElementById(n).style.backgroundColor = 'red'){
+			var redCenter = n;
+		}
+		if(document.getElementById(n).style.backgroundColor = 'blue'){
+			var blueCenter = n;
+		}
+		if(document.getElementById(n).style.backgroundColor = 'orange'){
+			var orangeCenter = n;
+		}
+		if(document.getElementById(n).style.backgroundColor = 'green'){
+			var greenCenter = n;
+		}
+		
+	}
+	console.log(document.getElementById('9').getAttribute('data-pos'));*/
+}
+
+</script>
+</body>
+</html>
